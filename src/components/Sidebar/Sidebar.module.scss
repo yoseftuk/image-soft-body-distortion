@@ -1,0 +1,59 @@
+.container {
+
+  $primary-color: #4d4dff;
+  $primary-color-hover: #1a1ac2;
+  width: 220px;
+  height: 100%;
+  overflow: auto;
+  padding: 20px;
+  flex-shrink: 0;
+  box-shadow: 1px 0 4px rgba(0, 0, 0, .1);
+  box-sizing: border-box;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .option {
+    border-radius: 6px;
+    overflow: clip;
+    border: 2px solid transparent;
+    width: fit-content;
+    height: fit-content;
+
+    &.active {
+      border-color: $primary-color;
+      box-shadow: 0 0 6px $primary-color;
+    }
+
+    .img {
+      display: block;
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+  }
+
+  .reset_btn {
+    background-color: $primary-color;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    color: white;
+    font-weight: 600;
+    width: 100%;
+    padding: 10px 20px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 18px;
+    user-select: none;
+
+    &:hover {
+      background-color: $primary-color-hover;
+    }
+  }
+}
