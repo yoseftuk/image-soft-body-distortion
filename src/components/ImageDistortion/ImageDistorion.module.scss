@@ -1,0 +1,11 @@
+.container {
+    display: block;
+    overflow: visible;
+    pointer-events: none;
+    touch-action: none;
+
+    image {
+        pointer-events: auto;
+        touch-action: auto;
+    }
+}
