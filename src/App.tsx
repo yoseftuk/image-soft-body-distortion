@@ -1,24 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import imageSrc from './assets/img-2.webp';
+import styles from './App.module.scss';
+import ImageDistortion from "./components/ImageDistortion/ImageDistortion";
+import RigitBody from "./components/RigitBody/RigitBody";
+
+const WIDTH = 500, HEIGHT = 500;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.container}>
+     <RigitBody width={WIDTH} height={HEIGHT} densityRatio={.05}>{({controls}) => (
+         <ImageDistortion src={imageSrc} width={WIDTH} height={HEIGHT} controls={controls} densityRatio={.05}/>
+     )}</RigitBody>
     </div>
   );
 }
