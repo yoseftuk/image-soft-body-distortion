@@ -1,6 +1,8 @@
 import {Vector} from "../../types";
 
-const FORCE_BASE = 0.18;
+const FORCE_BASE = 0.1;
+const FRICTION = .98;
+
 class RigitVertex {
     position: Vector;
     velocity: Vector;
@@ -24,6 +26,7 @@ class RigitVertex {
     private getForce() {
         return this.linkedVertices.reduce((sumForce, {vertex, distance, force: f}) => {
             const actualDistance = Math.sqrt((this.position.x - vertex.position.x)**2 + (this.position.y-vertex.position.y)**2);
+            // const ff = Math.sign(distance - actualDistance) > 0 ? f : f*.5;
             const force = (distance - actualDistance) * FORCE_BASE * f;
 
             return {
@@ -35,8 +38,8 @@ class RigitVertex {
 
     update() {
         this.acceleration = this.getForce();
-        this.velocity.x = (this.velocity.x + this.acceleration.x) * .9;
-        this.velocity.y = (this.velocity.y + this.acceleration.y) * .9;
+        this.velocity.x = (this.velocity.x + this.acceleration.x) * FRICTION;
+        this.velocity.y = (this.velocity.y + this.acceleration.y) * FRICTION;
     }
 
     move() {
