@@ -8,14 +8,14 @@ import React, {
     useRef,
     useState
 } from 'react';
-import styles from './RigitBody.module.scss';
-import RigitBodyControl from "./RigitBodyControl/RigitBodyControl";
+import styles from './SoftBody.module.scss';
+import SoftBodyControl from "./SoftBodyControl/SoftBodyControl";
 import {Vector} from "../../types";
-import RigitVertex from "./rigitVertex";
+import SoftBodyVertex from "./softBodyVertex";
 import useDrag from "../../hooks/useDrag";
 import useEvent from "../../hooks/useEvent";
 
-interface RigitBodyProps {
+interface SoftBodyProps {
     width: number;
     height: number;
     densityRatio?: number;
@@ -23,17 +23,17 @@ interface RigitBodyProps {
     children: (props: { controls: Vector[][] }) => ReactNode;
 }
 
-export interface RigitBodyHandle {
+export interface SoftBodyHandle {
     reset(): void;
 }
 
-const RigitBody = forwardRef(({
+const SoftBody = forwardRef(({
                                   width,
                                   height,
                                   densityRatio = .1,
                                   isDebug,
                                   children
-                              }: RigitBodyProps, ref: ForwardedRef<RigitBodyHandle>) => {
+                              }: SoftBodyProps, ref: ForwardedRef<SoftBodyHandle>) => {
 
     const isMounted = useRef(true);
     const getDefaultsMeta = useCallback(() => {
@@ -48,7 +48,7 @@ const RigitBody = forwardRef(({
         const distanceX = width / colsCount, distanceY = height / rowsCount,
             distanceDiagonal = Math.sqrt(distanceX ** 2 + distanceY ** 2),
             bigDiagonal = Math.sqrt(width ** 2 + height ** 2);
-        const controls = Array.from(Array(rowsCount + 1), (_, i) => Array.from(Array(colsCount + 1), (_, j) => new RigitVertex(width / colsCount * j, height / rowsCount * i, i, j)));
+        const controls = Array.from(Array(rowsCount + 1), (_, i) => Array.from(Array(colsCount + 1), (_, j) => new SoftBodyVertex(width / colsCount * j, height / rowsCount * i, i, j)));
         for (let i = 1; i < controls.length; i++) {
             for (let j = 1; j < controls.length; j++) {
                 const force = 1;
@@ -83,7 +83,7 @@ const RigitBody = forwardRef(({
         return controls;
     }, [getDefaultsMeta, height, width]);
 
-    const [controls, setControls] = useState<RigitVertex[][]>(getDefaultControls());
+    const [controls, setControls] = useState<SoftBodyVertex[][]>(getDefaultControls());
 
     const resetControls = useEvent(() => setControls(getDefaultControls()));
 
@@ -158,11 +158,11 @@ const RigitBody = forwardRef(({
         <div className={styles.container} onPointerDown={handlePointerDown}
              style={{width: `${width}px`, height: `${height}px`, cursor: isDragging ? 'grabbing' : 'grab'}}>
             {children({controls: controls.map(row => row.map(v => ({x: v.position.x, y: v.position.y})))})}
-            {isDebug ? controls.map((row, i) => row.map((vertex, j) => <RigitBodyControl key={`${i}-${j}`}
-                                                                                         x={vertex.position.x}
-                                                                                         y={vertex.position.y}/>)) : null}
+            {isDebug ? controls.map((row, i) => row.map((vertex, j) => <SoftBodyControl key={`${i}-${j}`}
+                                                                                        x={vertex.position.x}
+                                                                                        y={vertex.position.y}/>)) : null}
         </div>
     );
 });
 
-export default RigitBody;
+export default SoftBody;

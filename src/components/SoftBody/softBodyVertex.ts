@@ -3,13 +3,13 @@ import {Vector} from "../../types";
 const FORCE_BASE = 0.14;
 const FRICTION = .97;
 
-class RigitVertex {
+class SoftBodyVertex {
     position: Vector;
     velocity: Vector;
     acceleration: Vector;
     i: number;
     j: number;
-    private linkedVertices: {vertex: RigitVertex, distance: number, force: number}[] = [];
+    private linkedVertices: {vertex: SoftBodyVertex, distance: number, force: number}[] = [];
 
     constructor(x: number, y: number, i: number, j: number) {
         this.position = {x, y};
@@ -19,7 +19,7 @@ class RigitVertex {
         this.j = j;
     }
 
-    linkVertex(vertex: RigitVertex, distance: number, force = 1) {
+    linkVertex(vertex: SoftBodyVertex, distance: number, force = 1) {
         this.linkedVertices.push({vertex, distance, force});
     }
 
@@ -48,4 +48,4 @@ class RigitVertex {
     }
 }
 
-export default RigitVertex;
+export default SoftBodyVertex;
