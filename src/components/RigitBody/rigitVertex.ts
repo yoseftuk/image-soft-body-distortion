@@ -1,7 +1,7 @@
 import {Vector} from "../../types";
 
-const FORCE_BASE = 0.1;
-const FRICTION = .98;
+const FORCE_BASE = 0.14;
+const FRICTION = .97;
 
 class RigitVertex {
     position: Vector;
