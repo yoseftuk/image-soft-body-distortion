@@ -26,7 +26,6 @@ class SoftBodyVertex {
     private getForce() {
         return this.linkedVertices.reduce((sumForce, {vertex, distance, force: f}) => {
             const actualDistance = Math.sqrt((this.position.x - vertex.position.x)**2 + (this.position.y-vertex.position.y)**2);
-            // const ff = Math.sign(distance - actualDistance) > 0 ? f : f*.5;
             const force = (distance - actualDistance) * FORCE_BASE * f;
 
             return {

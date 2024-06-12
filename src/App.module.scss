@@ -9,5 +9,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+  }
+
+  .instructions {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 20px auto;
+    width: fit-content;
+    bottom: 0;
+    user-select: none;
   }
 }

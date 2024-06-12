@@ -19,6 +19,7 @@ function App() {
                     <ImageDistortion src={source} width={WIDTH} height={HEIGHT} controls={controls}
                                      densityRatio={DENSITY_RATIO}/>
                 )}</SoftBody>
+                <div className={styles.instructions}>Drag the image to see the effect</div>
             </div>
         </div>
     );
