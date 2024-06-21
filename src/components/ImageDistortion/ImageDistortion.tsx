@@ -29,9 +29,9 @@ function ImageDistortion({src, width, height, densityRatio = .1, controls}: Imag
 
         for (let i = 1; i < controls.length; i++) {
             for (let j = 1; j < controls[i].length; j++) {
-                res.push(<ImageParticle p1={{x: j - 1, y: i - 1}} p2={{x: j - 1, y: i}}
+                res.push(<ImageParticle key={`${i}-${j}-1`} p1={{x: j - 1, y: i - 1}} p2={{x: j - 1, y: i}}
                                         p3={{x: j, y: i}} {...commonProps}/>);
-                res.push(<ImageParticle p1={{x: j - 1, y: i - 1}} p2={{x: j, y: i - 1}}
+                res.push(<ImageParticle key={`${i}-${j}-2`} p1={{x: j - 1, y: i - 1}} p2={{x: j, y: i - 1}}
                                         p3={{x: j, y: i}} {...commonProps}/>);
             }
         }

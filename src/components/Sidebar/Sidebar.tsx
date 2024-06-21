@@ -19,7 +19,7 @@ function Sidebar({selectedSource, onSourceChange, onReset}: SidebarProps) {
         <div className={styles.container}>
             <div className={styles.content}>
                 {imageOptions.map(option => (
-                    <div className={styles.option + (option === selectedSource ? ` ${styles.active}` : '')}
+                    <div key={option} className={styles.option + (option === selectedSource ? ` ${styles.active}` : '')}
                          onClick={() => onSourceChange(option)}>
                         <img className={styles.img} alt={'source-option'} src={option}/>
                     </div>
